@@ -1,0 +1,31 @@
+name: cicd
+
+on:
+    push:
+        branches: ["master"]
+    pull_request:
+        branches: ["master"]
+
+jobs:
+    build:
+        runs-on: [ubuntu-latest]
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v3
+            - name: Login to docker hub
+              run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORK}}
+            - name: Build docker image
+              run: docker build -t tdq11111/backend_nodejs_medical .
+            - name: Publish image to docker hub
+              run: docker push tdq11111/backend_nodejs_medical
+
+    deploy:
+        needs: build
+        runs-on: [aws-ec2]
+        steps:
+            - name: Pull image from docker hub
+              run: docker pull tdq11111/backend_nodejs_medical
+            - name: Delete old-container
+              run: docker rm -f backend_nodejs_medical_container
+            - name: Run docker container
+              run: docker run -d -p 8080:8080 -name backend_nodejs_medical_container tdq11111/backend_nodejs_medical
