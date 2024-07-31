@@ -28,4 +28,4 @@ jobs:
             - name: Delete old-container
               run: docker rm -f backend_nodejs_medical_container
             - name: Run docker container
-              run: docker run -d -p 8080:8080 -name backend_nodejs_medical_container tdq11111/backend_nodejs_medical
+              run: docker run -d -p 8080:8080 --name backend_nodejs_medical_container tdq11111/backend_nodejs_medical
