@@ -31,7 +31,7 @@ jobs:
               run: docker pull tdq11111/backend_nodejs_medical:latest
             - name: Delete old container
               run: docker rm -f backend_health-booking-backend_nodejs-1 || true
-            - name: Create network
-              run: docker network create health-booking-network
+            # - name: Create network
+            #   run: docker network create health-booking-network
             - name: Run Docker container
               run: docker compose -p backend_health-booking up -d
