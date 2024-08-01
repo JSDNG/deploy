@@ -1,5 +1,4 @@
 name: cicd
-
 on:
     push:
         branches: ["master"]
