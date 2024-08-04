@@ -14,9 +14,9 @@ services:
             - health-booking-network
 
     backend_nodejs:
-        build:
-            context: .
-            dockerfile: Dockerfile
+        # build:
+        #     context: .
+        #     dockerfile: Dockerfile
         depends_on:
             - db_mysql
         image: tdq11111/backend_nodejs_medical
